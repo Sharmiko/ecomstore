@@ -1,7 +1,11 @@
-from pathlib import Path
+import os
+import sys
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(os.path.join(BASE_DIR, '../../../'))
+sys.path.append(os.path.join(BASE_DIR, '../../../ecomstore'))
+sys.path.append(os.path.join(BASE_DIR, '../../../ecomstore/apps'))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'k+cjiqh((89%85cf4w-zbk)^!^xhy151!_sgad-s_eeq0r5_p)'
@@ -17,6 +21,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # local apps
+    'ecomstore.apps.catalog.apps.CatalogConfig',
+    'ecomstore.apps.utils.apps.UtilsConfig',
+
+
 ]
 
 MIDDLEWARE = [
