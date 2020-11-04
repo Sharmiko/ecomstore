@@ -1,4 +1,5 @@
 import os
+import uuid
 import random
 
 import pandas as pd
@@ -21,6 +22,7 @@ def add_data_to_db():
             if is_category:
                 continue
             category = Category.objects.create(
+                uuid=uuid.uuid4(),
                 name=file.split('.')[0],
                 is_active=True
             )
@@ -28,13 +30,9 @@ def add_data_to_db():
                 is_product = Product.objects.filter(name=row['name']).first()
                 if is_product:
                     continue
-                is_slug = Product.objects.filter(slug='-'.join(
-                    row['name'].split(' '))).first()
-                if is_slug:
-                    continue
                 product = Product.objects.create(
+                    uuid=uuid.uuid4(),
                     name=row['name'],
-                    slug='-'.join(row['name'].split(' ')),
                     brand=row['brand'],
                     sku=row['model'],
                     price=row['current_price'],

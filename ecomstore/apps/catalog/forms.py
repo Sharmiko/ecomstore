@@ -7,9 +7,9 @@ class ProductAdminForm(forms.ModelForm):
     class Meta:
         model = Product
         fields = (
-            'name', 'slug', 'brand', 'sku', 'price', 'old_price', 'currency',
-            'image', 'thumbnail', 'is_active', 'is_bestseller', 'is_featured',
-            'quantity', 'meta_keyword', 'categories'
+            'uuid', 'name', 'brand', 'sku', 'price', 'old_price', 'currency',
+            'image', 'quantity', 'thumbnail', 'is_active', 'is_bestseller',
+            'is_featured', 'quantity', 'meta_keyword', 'categories'
         )
 
     def clean_price(self):
