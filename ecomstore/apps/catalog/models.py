@@ -1,8 +1,8 @@
 from django.db import models
-from django.urls import reverse
 
 
 class Category(models.Model):
+    uuid = models.UUIDField()
     name = models.CharField(max_length=50)
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -18,9 +18,8 @@ class Category(models.Model):
 
 
 class Product(models.Model):
+    uuid = models.UUIDField()
     name = models.CharField(max_length=255, unique=True)
-    slug = models.SlugField(max_length=255, unique=True,
-        help_text='Unique value for product page URL, created from name.')
     brand = models.CharField(max_length=50, blank=True, null=True)
     sku = models.CharField(max_length=50)
     price = models.DecimalField(max_digits=9, decimal_places=2)
@@ -45,10 +44,6 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
-
-    @property
-    def get_absolute_url(self):
-        return reverse('catalog_product', kwargs={'slug': self.slug})
 
     @property
     def sale_price(self):
