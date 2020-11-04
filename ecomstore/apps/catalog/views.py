@@ -29,7 +29,6 @@ class ProductDetail(APIView):
     def post(self, request) -> Response:
         """ get product based on uuid
         """
-        print(request, request.__dir__())
         uuid = request.data.get('uuid')
         if not uuid:
             return Response(
