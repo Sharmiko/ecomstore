@@ -18,7 +18,7 @@ class ShowCartViewSet(viewsets.ViewSet):
                     'message': 'Cart id was not provided',
                     'status': 'error'
                 }, status=status.HTTP_400_BAD_REQUEST)
-        print(cart_id)
+
         cart_item = CartItem.objects.filter(cart_id=cart_id).first()
         if not cart_item:
             return Response(
