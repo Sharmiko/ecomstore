@@ -24,6 +24,7 @@ INSTALLED_APPS = [
 
     # local apps
     'ecomstore.apps.catalog.apps.CatalogConfig',
+    'ecomstore.apps.cart.apps.CartConfig',
     'ecomstore.apps.utils.apps.UtilsConfig',
 
 
@@ -93,6 +94,14 @@ USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# Sessions
+
+SESSION_COOKIE_NAME = 'sessionid'
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+SESSION_COOKIE_AGE = 60 * 60 * 24 * 7 * 2
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+SESSION_COOKIE_SECURE = False
+
