@@ -1,3 +1,5 @@
+from uuid import UUID
+
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -37,7 +39,13 @@ class ProductDetail(APIView):
                     'status': 'error'
                 }, status=status.HTTP_400_BAD_REQUEST)
 
-        product = Product.objects.get(uuid=uuid)
+        product = Product.objects.filter(uuid=UUID(uuid)).first()
+        if not product:
+            return Response(
+                {
+                    'message': 'Product with provided UUID was not found',
+                    'status': 'error'
+                }, status=status.HTTP_404_NOT_FOUND)
         serializer = ProductSerializer(product)
 
         return Response({'product': serializer.data})

@@ -7,4 +7,4 @@ router = DefaultRouter()
 router.register(r'show_cart', ShowCartViewSet, r'show_cart')
 
 urlpatterns = router.urls
-print(urlpatterns)
+
