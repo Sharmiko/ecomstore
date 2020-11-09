@@ -19,7 +19,7 @@ class ShowCartViewSet(viewsets.ViewSet):
                     'status': 'error'
                 }, status=status.HTTP_400_BAD_REQUEST)
 
-        cart_item = CartItem.objects.filter(cart_id=cart_id).first()
+        cart_item = CartItem.objects.filter(cart_id=cart_id)
         if not cart_item:
             return Response(
                 {
@@ -27,7 +27,7 @@ class ShowCartViewSet(viewsets.ViewSet):
                     'status': 'error'
                 }, status=status.HTTP_404_NOT_FOUND)
 
-        serializer = CartItemSerializer(cart_item)
+        serializer = CartItemSerializer(cart_item, many=True)
 
         return Response({'cart': serializer.data})
 
