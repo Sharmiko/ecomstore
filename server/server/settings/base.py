@@ -12,7 +12,6 @@ SECRET_KEY = 'k+cjiqh((89%85cf4w-zbk)^!^xhy151!_sgad-s_eeq0r5_p)'
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -27,7 +26,8 @@ INSTALLED_APPS = [
     'ecomstore.apps.cart.apps.CartConfig',
     'ecomstore.apps.utils.apps.UtilsConfig',
 
-
+    # 3rd party
+    'rest_framework',
 ]
 
 MIDDLEWARE = [

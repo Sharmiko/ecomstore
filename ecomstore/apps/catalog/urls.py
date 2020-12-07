@@ -1,9 +1,11 @@
-from django.urls import path
+from rest_framework.routers import DefaultRouter
 
 from ecomstore.apps.catalog.views import CategoryList, ProductDetail
 
-urlpatterns = [
-    path('categories/', CategoryList.as_view()),
-    path('product/', ProductDetail.as_view())
-]
+
+router = DefaultRouter()
+router.register(r'categories', CategoryList, r'categories')
+router.register(r'product', ProductDetail, r'product')
+
+urlpatterns = router.urls
 
