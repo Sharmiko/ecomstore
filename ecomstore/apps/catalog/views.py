@@ -15,4 +15,3 @@ class ProductDetail(RetrieveProductMixin,
                     viewsets.ViewSet):
     # TODO - add permission classes
     pass
-

@@ -21,4 +21,3 @@ def _generate_cart_id():
         cart_id += characters[random.randint(0, len(characters) - 1)]
 
     return cart_id
-

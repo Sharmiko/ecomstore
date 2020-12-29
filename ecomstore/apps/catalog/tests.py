@@ -55,4 +55,3 @@ class CatalogTests(TestCase):
             'uuid': '181c804f-d9a7-4dec-b97b-fc06fcc6a553'
         })
         self.assertEqual(response.status_code, 404)
-

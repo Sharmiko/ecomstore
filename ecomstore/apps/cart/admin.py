@@ -9,8 +9,7 @@ class CartAdmin(admin.ModelAdmin):
     list_display_links = ('cart_id',)
     list_per_page = 20
     ordering = ['date_added']
-    search_fields = ['product',]
+    search_fields = ['product', ]
 
 
 admin.site.register(CartItem, CartAdmin)
-

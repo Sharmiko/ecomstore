@@ -8,4 +8,3 @@ router.register(r'categories', CategoryList, r'categories')
 router.register(r'product', ProductDetail, r'product')
 
 urlpatterns = router.urls
-

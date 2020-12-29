@@ -97,4 +97,3 @@ class CreateCartMixin(object):
                 'message': 'Cart updated successfully',
                 'status': 'success'
             }, status=status.HTTP_200_OK)
-

@@ -70,4 +70,3 @@ class CartTests(TestCase):
 
         response = self.client.get(f'/api/show_cart/?cart_id={cart_id}')
         self.assertEqual(len(response.data.get('cart')), 2)
-
