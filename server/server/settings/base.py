@@ -24,6 +24,7 @@ INSTALLED_APPS = [
     # local apps
     'ecomstore.apps.catalog.apps.CatalogConfig',
     'ecomstore.apps.cart.apps.CartConfig',
+    'ecomstore.apps.checkout.apps.CheckoutConfig',
     'ecomstore.apps.utils.apps.UtilsConfig',
 
     # 3rd party
