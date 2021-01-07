@@ -6,4 +6,3 @@ urlpatterns = [
     path('api/', include('ecomstore.apps.catalog.urls')),
     path('api/', include('ecomstore.apps.cart.urls')),
 ]
-
