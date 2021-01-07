@@ -1,10 +1,10 @@
 from rest_framework import viewsets
 
-from ecomstore.apps.cart.mixins import ListCartMixin, CreateCartMixin
+from ecomstore.apps.cart.mixins import ShowCartMixin, AddToCartMixin
 
 
-class ShowCartViewSet(ListCartMixin,
-                      CreateCartMixin,
-                      viewsets.ViewSet):
+class CartViewSet(ShowCartMixin,
+                  AddToCartMixin,
+                  viewsets.ViewSet):
     # TODO - add permission classes
     pass

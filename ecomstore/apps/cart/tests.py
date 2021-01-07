@@ -51,22 +51,22 @@ class CartTests(TestCase):
 
     def test_add_cart_item(self):
         data = {
-            'id': _generate_cart_id(),
+            'cart_id': _generate_cart_id(),
             'quantity': 1,
             'product_uuid': '7b88dc16-88a9-4446-a2d3-42907c815660'
         }
-        response = self.client.post('/api/show_cart/', data=data)
+        response = self.client.post('/api/cart/add_to_cart/', data=data)
         self.assertEqual(response.status_code, 200)
 
         cart_id = CartItem.objects.first().cart_id
 
         data = {
-            'id': cart_id,
+            'cart_id': cart_id,
             'quantity': 1,
             'product_uuid': '75616091-f312-442a-a8bd-b433a5003200'
         }
-        response = self.client.post('/api/show_cart/', data=data)
+        response = self.client.post('/api/cart/add_to_cart/', data=data)
         self.assertEqual(response.status_code, 200)
 
-        response = self.client.get(f'/api/show_cart/?cart_id={cart_id}')
+        response = self.client.get(f'/api/cart/get_cart/?cart_id={cart_id}')
         self.assertEqual(len(response.data.get('cart')), 2)
