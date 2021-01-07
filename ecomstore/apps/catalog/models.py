@@ -24,7 +24,7 @@ class Product(models.Model):
     sku = models.CharField(max_length=50)
     price = models.DecimalField(max_digits=9, decimal_places=2)
     old_price = models.DecimalField(max_digits=9, decimal_places=2,
-        blank=True, default=0.00)
+                                    blank=True, default=0.00)
     currency = models.CharField(max_length=16)
     image = models.CharField(max_length=255)
     thumbnail = models.CharField(max_length=255)
@@ -33,7 +33,8 @@ class Product(models.Model):
     is_featured = models.BooleanField(default=False)
     quantity = models.IntegerField()
     meta_keyword = models.CharField(max_length=255,
-        help_text='Comma-delimited set of SEO keywords for meta tag')
+                                    help_text='Comma-delimited set of SEO '
+                                              'keywords for meta tag')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     categories = models.ManyToManyField(Category)

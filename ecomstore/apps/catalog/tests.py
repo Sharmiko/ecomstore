@@ -12,7 +12,7 @@ class CatalogTests(TestCase):
     def setUp(self) -> None:
         self.client = APIClient()
         self.categories = [
-            'accessories', 'bags', 'beauty', 'house', 'jewelary',
+            'accessories', 'bags', 'beauty', 'house', 'jewelry',
             'kids', 'men', 'shoes', 'women'
         ]
         for cat in self.categories:
@@ -31,26 +31,33 @@ class CatalogTests(TestCase):
         ).save()
 
     def test_category_list_view(self):
-        response = self.client.get('/api/categories/')
+        response = self.client.get('/api/catalog/get_categories/')
         self.assertEqual(sorted(response.data.get('categories')),
                          sorted(self.categories))
         self.assertEqual(response.status_code, 200)
 
     def test_product_detail_view(self):
-        response = self.client.post('/api/product/', data={
-            'uuid': '681c804f-d9a7-4dec-b97b-fc06fcc6a553'
-        })
+        response = self.client.post(
+            '/api/catalog/retrieve_product/',
+            data={
+                'uuid': '681c804f-d9a7-4dec-b97b-fc06fcc6a553'
+            }
+        )
         data = response.data.get('product')
 
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(data.get('name'),
-                         "Gilets chauds d'extérieur élégants de couleur unie")
+        self.assertEqual(
+            data.get('name'),
+            "Gilets chauds d'extérieur élégants de couleur unie"
+        )
         self.assertEqual(data.get('sku'), 'SKU788804')
         self.assertEqual(data.get('quantity'), 3)
 
+        # empty parameters
         response = self.client.post('/api/product/', data={})
-        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.status_code, 404)
 
+        # invalid uuid
         response = self.client.post('/api/product/', data={
             'uuid': '181c804f-d9a7-4dec-b97b-fc06fcc6a553'
         })
