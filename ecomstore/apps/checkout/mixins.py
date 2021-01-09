@@ -5,6 +5,8 @@ from rest_framework import status
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
+from ecomstore.apps.checkout.models import Order, OrderItem
+
 
 class CreditCartMixin(object):
 
@@ -72,3 +74,35 @@ class CreditCartMixin(object):
             _sum += digit
 
         return (_sum % 10) == 0
+
+
+class CheckoutMixin(object):
+
+    @action(detail=False, methods=['POST'])
+    def process(self, request):
+        # Transaction results
+        APPROVED = '1'
+        DECLINED = '2'
+        ERROR = '3'
+        HELD_FOR_REVIEW = '4'
+
+        data = request.data
+
+        cc_card_num = data.get('cc_number', '')
+        cc_exp_month = data.get('cc_expire_month', '')
+        cc_exp_year = data.get('cc_expire_year', '')
+        cc_cvv = data.get('cc_cvv', '')
+
+        cc_exp_date = cc_exp_month + cc_exp_year
+
+        # TODO - add credit cart amount check
+        # TODO - add authorization/validation
+        response = None
+
+        # TODO - add response logic
+
+    @action(detail=False, methods=['POST'])
+    def create_order(self, request, transaction_id):
+        order = Order()
+
+        # TODO - get order information and save it in model

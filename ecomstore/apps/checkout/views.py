@@ -7,3 +7,8 @@ class CreditCartViewSet(CreditCartMixin,
                         viewsets.ViewSet):
     # TODO - add permission classes
     pass
+
+
+class CheckoutViewSet(viewsets.ViewSet):
+    # TODO - add permission classes
+    pass
