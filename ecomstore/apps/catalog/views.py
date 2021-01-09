@@ -5,8 +5,13 @@ from ecomstore.apps.catalog.mixins import (
 )
 
 
-class CatalogViewSet(ListCategoryMixin,
-                     RetrieveProductMixin,
+class CategoryViewSet(ListCategoryMixin,
+                      viewsets.ViewSet):
+    # TODO - add permission classes
+    pass
+
+
+class ProductViewSet(RetrieveProductMixin,
                      viewsets.ViewSet):
     # TODO - add permission classes
     pass
