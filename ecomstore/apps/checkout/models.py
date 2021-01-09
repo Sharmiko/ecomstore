@@ -23,7 +23,7 @@ class Order(models.Model):
     # order info
     date = models.DateField(auto_now_add=True)
     status = models.IntegerField(choices=ORDER_STATUS, default=SUBMITTED)
-    ip_address = models.IPAddressField()
+    ip_address = models.GenericIPAddressField()
     last_updated = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(User, null=True, on_delete=models.DO_NOTHING)
     transaction_id = models.CharField(max_length=20)

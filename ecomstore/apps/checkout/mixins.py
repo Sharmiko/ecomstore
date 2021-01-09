@@ -1,7 +1,9 @@
 import re
 import datetime
 
+from rest_framework import status
 from rest_framework.decorators import action
+from rest_framework.response import Response
 
 
 class CreditCartMixin(object):
@@ -15,11 +17,14 @@ class CreditCartMixin(object):
 
     @action(detail=False, methods=['GET'])
     def get_cc_info(self, request):
-        return {
-            'expire_years': self.get_cc_expire_years(),
-            'expire_months': self.get_cc_expire_months(),
-            'card_types': self.CARD_TYPES
-        }
+        return Response(
+            {
+                'expire_years': self.get_cc_expire_years(),
+                'expire_months': self.get_cc_expire_months(),
+                'card_types': self.CARD_TYPES
+            },
+            status=status.HTTP_200_OK
+        )
 
     @staticmethod
     def get_cc_expire_years():
