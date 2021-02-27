@@ -1,12 +1,22 @@
 from django.db import models
 
 
+class ActiveCategoryManager(models.Manager):
+    def get_query_set(self):
+        return super(ActiveCategoryManager, self).get_query_set().filter(
+            is_active=True
+        )
+
+
 class Category(models.Model):
     uuid = models.UUIDField()
     name = models.CharField(max_length=50)
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    object = models.Manager()
+    active = ActiveCategoryManager()
 
     class Meta:
         db_table = 'categories'
@@ -15,6 +25,12 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class ActiveProductManager(models.Manager):
+    def get_query_set(self):
+        return super(ActiveProductManager, self).get_queryset().filter(
+            is_active=True)
 
 
 class Product(models.Model):
@@ -38,6 +54,9 @@ class Product(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     categories = models.ManyToManyField(Category)
+
+    objects = models.Manager()
+    active = ActiveProductManager()
 
     class Meta:
         db_table = 'products'
