@@ -9,7 +9,7 @@ from rest_framework.decorators import action
 from ecomstore.apps.search.models import SearchTerm
 from ecomstore.apps.catalog.models import Product
 from ecomstore.apps.catalog.serializers import ProductSerializer
-
+from ecomstore.apps.stats import stats
 
 class SearchViewSet(viewsets.ViewSet):
 
@@ -59,6 +59,7 @@ class SearchViewSet(viewsets.ViewSet):
         if len(q) > 2:
             term = SearchTerm()
             term.q = q
+            term.tracking_id = stats.tracking_id(request)
 
             x_forwarded = request.META.get('HTTP_X_FORWARDED_FOR')
             if x_forwarded:

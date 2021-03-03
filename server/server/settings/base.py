@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'ecomstore.apps.checkout.apps.CheckoutConfig',
     'ecomstore.apps.utils.apps.UtilsConfig',
     'ecomstore.apps.search.apps.SearchConfig',
+    'ecomstore.apps.stats.apps.StatsConfig',
 
     # 3rd party
     'rest_framework',
