@@ -1,7 +1,6 @@
 from typing import List
 
 from django.db.models import Q
-from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from rest_framework import viewsets
 from rest_framework import status
 from rest_framework.response import Response
