@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 class ActiveCategoryManager(models.Manager):
@@ -109,3 +110,26 @@ class Product(models.Model):
         products = Product.active.filter(orderitem__in=items).distinct()
 
         return products
+
+
+class ActiveProductReviewManager(models.Manager):
+    def all(self):
+        return super(ActiveProductReviewManager, self).all().filter(
+            is_approved=True)
+
+
+class ProductReview(models.Model):
+    RATINGS = (
+        (5, 5), (4, 4), (3, 3), (2, 2), (1, 1),
+    )
+
+    product = models.ForeignKey(Product, on_delete=models.DO_NOTHING)
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    title = models.CharField(max_length=50)
+    date = models.DateTimeField(auto_now_add=True)
+    rating = models.PositiveSmallIntegerField(default=5, choices=RATINGS)
+    is_approved = models.BooleanField(default=True)
+    content = models.TextField()
+
+    objects = models.Manager()
+    approved = ActiveProductReviewManager()
