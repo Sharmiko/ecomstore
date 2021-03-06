@@ -1,5 +1,8 @@
 from django.db import models
+from django.db.models.signals import post_save, post_delete
 from django.contrib.auth.models import User
+
+from ecomstore.apps.caching.caching import cache_update, cache_evict
 
 
 class ActiveCategoryManager(models.Manager):
@@ -26,6 +29,10 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+
+    @property
+    def cache_key(self):
+        return self.uuid
 
 
 class ActiveProductManager(models.Manager):
@@ -72,6 +79,10 @@ class Product(models.Model):
             return self.price
         else:
             return None
+
+    @property
+    def cache_key(self):
+        return self.uuid
 
     def cross_sells(self):
         from ecomstore.apps.checkout.models import Order, OrderItem
@@ -133,3 +144,9 @@ class ProductReview(models.Model):
 
     objects = models.Manager()
     approved = ActiveProductReviewManager()
+
+
+post_save.connect(cache_update, sender=Product)
+post_delete.connect(cache_evict, sender=Product)
+post_save.connect(cache_update, sender=Category)
+post_delete.connect(cache_evict, sender=Category)
